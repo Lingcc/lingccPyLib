@@ -7,7 +7,22 @@ import time
 CUR_TIME_STR=time.strftime("%Y%m%d-%H%M%S")
 CUR_SCRIPT_DIR=os.path.dirname(os.path.realpath(__file__))
 
+
+
 def removeIfExists(filepath):
+  """Remove file only if it exists.
+  
+    This is done by catching the OSError exception.
+
+    Args:
+        filepath: The path of the file to be removed.
+       
+    Returns:
+        no return value:
+
+    Raises:
+        No exception raises.
+    """
   try:
     os.remove(filepath)
   except OSError:
@@ -15,6 +30,24 @@ def removeIfExists(filepath):
 
 def runCmd(cmdlst, outfn=None, errfn=None, runasShell=False,
            logfile=None, cwd=None):
+  """Run unix command by create a new process.
+  
+  This is done by subprocess.Popen.
+  
+  Args:
+      cmdlst: all the args and names of the cmd.
+      outfn: filename for stdout of the process
+      errfn: filename for stderr of the process
+      runasShell: currently unused
+      logfile: log file for runCmd to put the logs when trying to run the cmdlst
+      cwd: specify the directory for the cmd to run
+     
+  Returns:
+      no return value:
+  
+  Raises:
+      No exception raises.
+  """
   assert type(cmdlst) == type([])
   if logfile != None:
     with open(logfilename, 'a') as outfile:
